@@ -31,10 +31,12 @@ function validateSearch(searchTerm, searchableText) {
 function searchBy(searchTerm, searchableText) {
     startingSearchIndex = 0;
     indicies = [];
+    lastFoundIndex = searchableText.indexOf(searchTerm, startingSearchIndex);
 
-    while (searchableText.indexOf(searchTerm, startingSearchIndex) != -1) {
-        indicies.push(searchableText.indexOf(searchTerm,startingSearchIndex));
-        startingSearchIndex += searchTerm.length;
+    while (lastFoundIndex != -1) {
+        indicies.push(lastFoundIndex);
+        startingSearchIndex = lastFoundIndex + searchTerm.length;
+        lastFoundIndex = searchableText.indexOf(searchTerm, startingSearchIndex)
     }
 
     return indicies;
